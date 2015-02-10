@@ -7,7 +7,7 @@
 	var userModule = angular.module('countryModule', ['MockModule', 'CrudModule']);
 
 	mainApp.config(['$routeProvider', function ($routeProvider) {
-			$routeProvider.when('country', {
+			$routeProvider.when('/country', {
 				templateUrl: 'src/modules/country/country.tpl.html',
 				controller: 'countryCtrl'
 			}).otherwise('/');
@@ -15,11 +15,11 @@
 
 	userModule.constant('context', 'users');
 
-	userModule.config(['context', 'apiUrlFactoryProvider', function (context, apiUrlFactoryProvider) {
-			apiUrlFactoryProvider.setUrlParameters(context);
+	userModule.config(['context', 'CrudModule.urlProvider', function (context, urlProvider) {
+			urlProvider.setUrlParameters(context);
 		}]);
 
-	userModule.config(['context', 'MockModule.urlValueProvider', function (context, mockURLProvider) {
-			mockURLProvider.setUrlParameters(context);
+	userModule.config(['context', 'MockModule.urlProvider', function (context, urlProvider) {
+			urlProvider.setUrlParameters(context);
 		}]);
 })();
