@@ -2,9 +2,7 @@
 
 	var mainApp = angular.module('mainApp', ['ngRoute', 'countryModule']);
 
-	var userModule = angular.module('userModule', ['MockModule', 'CrudModule']);
-
-	var userModule = angular.module('countryModule', ['MockModule', 'CrudModule']);
+	var countryModule = angular.module('countryModule', ['MockModule', 'CrudModule']);
 
 	mainApp.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider.when('/country', {
@@ -13,13 +11,13 @@
 			}).otherwise('/');
 		}]);
 
-	userModule.constant('context', 'users');
+	countryModule.constant('context', 'countries');
 
-	userModule.config(['context', 'CrudModule.urlProvider', function (context, urlProvider) {
+	countryModule.config(['context', 'CrudModule.urlProvider', function (context, urlProvider) {
 			urlProvider.setUrlParameters(context);
 		}]);
 
-	userModule.config(['context', 'MockModule.urlProvider', function (context, urlProvider) {
+	countryModule.config(['context', 'MockModule.urlProvider', function (context, urlProvider) {
 			urlProvider.setUrlParameters(context);
 		}]);
 })();
