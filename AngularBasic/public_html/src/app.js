@@ -23,12 +23,8 @@
 	
 	sportModule.constant('context', 'sports');
 
-	sportModule.config(['context', 'CrudModule.urlProvider', function (context, urlProvider) {
-			urlProvider.setUrlParameters(context);
-		}]);
-
-	sportModule.config(['context', 'MockModule.urlProvider', function (context, urlProvider) {
-			urlProvider.setUrlParameters(context);
+	sportModule.config(['context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+			urlsProvider.registerUrl(context);
 		}]);
 
 	//Configuración módulo country
@@ -36,12 +32,8 @@
 
 	countryModule.constant('context', 'countries');
 
-	countryModule.config(['context', 'CrudModule.urlProvider', function (context, urlProvider) {
-			urlProvider.setUrlParameters(context);
-		}]);
-
-	countryModule.config(['context', 'MockModule.urlProvider', function (context, urlProvider) {
-			urlProvider.setUrlParameters(context);
+	countryModule.config(['context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+			urlsProvider.registerUrl(context);
 		}]);
 	
 	//Configuración módulo city
@@ -49,11 +41,7 @@
 	
 	cityModule.constant('context', 'cities');
 
-	cityModule.config(['context', 'CrudModule.urlProvider', function (context, urlProvider) {
-			urlProvider.setUrlParameters(context);
-		}]);
-
-	cityModule.config(['context', 'MockModule.urlProvider', function (context, urlProvider) {
-			urlProvider.setUrlParameters(context);
+	cityModule.config(['context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+			urlsProvider.registerUrl(context);
 		}]);
 })();

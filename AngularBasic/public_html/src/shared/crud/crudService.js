@@ -1,31 +1,18 @@
 (function () {
 	var crud = angular.module('CrudModule');
 
-	crud.provider('CrudModule.url', function () {
-		var context = false;
-		this.setUrlParameters = function (value) {
-			context = value;
-		};
-		this.$get = function () {
-			return 'webresources/' + context;
-		};
-	});
-
-	crud.factory('APIClient', ['$resource', 'CrudModule.url', function ($resource, url) {
-			return $resource(url + '/:id', {id: "@id"}, {
-				update: {method: 'PUT'},
-				query: {method: 'GET', isArray: false}
-			});
-		}]);
-
-	crud.service('CRUDService', ['APIClient', function (APIClient) {
+	crud.service('CRUDService', ['Restangular', function (RestAngular) {
 			var self = this;
 			this.currentRecord = {};
 			this.editMode = false;
 			this.records = [];
+			var api;
+			this.createApi = function(){
+				api = RestAngular.all(this.url);
+			};
 			this.fetchRecords = function () {
-				APIClient.query(function (data) {
-					self.records = data.records;
+				api.getList().then(function (data) {
+					self.records = data;
 					console.log(data);
 					self.currentRecord = {};
 					self.editMode = false;
@@ -37,27 +24,23 @@
 			};
 			this.saveRecord = function () {
 				if (this.currentRecord.id) {
-					APIClient.update({id: this.currentRecord.id}, this.currentRecord, function () {
+					this.currentRecord.put().then(function () {
 						self.fetchRecords();
 					});
 				} else {
-					APIClient.save(this.currentRecord, function () {
+					api.post(this.currentRecord).then( function () {
 						self.fetchRecords();
 					});
 				}
 			};
-			this.deleteRecord = function (id) {
-				var record = new APIClient();
-				record.id = id;
-				record.$delete(function () {
+			this.deleteRecord = function (record) {
+				record.remove().then(function () {
 					self.fetchRecords();
 				});
 			};
-			this.editRecord = function (id) {
-				APIClient.get({id: id}, function (data) {
-					self.editMode = true;
-					self.currentRecord = data;
-				});
+			this.editRecord = function (record) {
+				self.currentRecord = RestAngular.copy(record);
+				self.editMode = true;
 			};
 			this.extend = function (child) {
 				return App.Utils.extend(child, this);
