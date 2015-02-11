@@ -4,17 +4,11 @@
 
 	mainApp.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider.when('/sport', {
-				templateUrl: 'src/modules/sport/sport.tpl.html',
-				controller: 'sportCtrl',
-				controllerAs: 'sportCtrl'
+				templateUrl: 'src/modules/sport/sport.tpl.html'
 			}).when('/country', {
-				templateUrl: 'src/modules/country/country.tpl.html',
-				controller: 'countryCtrl',
-				controllerAs: 'countryCtrl'
+				templateUrl: 'src/modules/country/country.tpl.html'
 			}).when('/city', {
-				templateUrl: 'src/modules/city/city.tpl.html',
-				controller: 'cityCtrl',
-				controllerAs: 'cityCtrl'
+				templateUrl: 'src/modules/city/city.tpl.html'
 			}).otherwise('/');
 		}]);
 	
