@@ -21,27 +21,27 @@
 	//Configuración módulo sport
 	var sportModule = angular.module('sportModule', ['CrudModule','MockModule']);
 	
-	sportModule.constant('context', 'sports');
+	sportModule.constant('sport.context', 'sports');
 
-	sportModule.config(['context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+	sportModule.config(['sport.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
 			urlsProvider.registerUrl(context);
 		}]);
 
 	//Configuración módulo country
 	var countryModule = angular.module('countryModule', ['CrudModule','MockModule']);
 
-	countryModule.constant('context', 'countries');
+	countryModule.constant('country.context', 'countries');
 
-	countryModule.config(['context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+	countryModule.config(['country.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
 			urlsProvider.registerUrl(context);
 		}]);
 	
 	//Configuración módulo city
 	var cityModule = angular.module('cityModule', ['CrudModule','MockModule']);
 	
-	cityModule.constant('context', 'cities');
+	cityModule.constant('city.context', 'cities');
 
-	cityModule.config(['context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+	cityModule.config(['city.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
 			urlsProvider.registerUrl(context);
 		}]);
 })();

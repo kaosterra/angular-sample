@@ -1,10 +1,8 @@
 (function () {
 	var app = angular.module('sportModule');
 
-	app.controller('sportCtrl', ['CRUDService', 'context', function (crudService, context) {
-			this.crudService = crudService.extend(function () {
-				this.url = context;
-			});
-			this.crudService.createApi();
+	app.controller('sportCtrl', ['sportService', function (sportService) {
+			this.crudService = sportService;
+			this.crudService.fetchRecords();
 		}]);
 })();

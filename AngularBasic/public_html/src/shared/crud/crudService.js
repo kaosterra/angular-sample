@@ -2,18 +2,17 @@
 	var crud = angular.module('CrudModule');
 
 	crud.service('CRUDService', ['Restangular', function (RestAngular) {
-			var self = this;
-			this.currentRecord = {};
-			this.editMode = false;
-			this.records = [];
-			var api;
-			this.createApi = function(){
-				api = RestAngular.all(this.url);
+			var self;
+			this.init = function () {
+				this.api = RestAngular.all(this.url);
+				this.records = [];
+				this.currentRecord = {};
+				this.editMode = false;
+				self = this;
 			};
 			this.fetchRecords = function () {
-				api.getList().then(function (data) {
+				this.api.getList().then(function (data) {
 					self.records = data;
-					console.log(data);
 					self.currentRecord = {};
 					self.editMode = false;
 				});
@@ -28,7 +27,7 @@
 						self.fetchRecords();
 					});
 				} else {
-					api.post(this.currentRecord).then( function () {
+					this.api.post(this.currentRecord).then(function () {
 						self.fetchRecords();
 					});
 				}
