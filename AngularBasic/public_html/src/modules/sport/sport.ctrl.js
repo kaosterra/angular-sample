@@ -3,6 +3,5 @@
 
 	app.controller('sportCtrl', ['sportService', function (sportService) {
 			this.crudService = sportService;
-			this.crudService.fetchRecords();
 		}]);
 })();

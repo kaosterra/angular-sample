@@ -7,6 +7,7 @@
 				this.records = [];
 				this.currentRecord = {};
 				this.editMode = false;
+				this.fetchRecords();
 			};
 			this.fetchRecords = function () {
 				var self = this;

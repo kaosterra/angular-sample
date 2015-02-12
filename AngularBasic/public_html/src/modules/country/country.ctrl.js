@@ -3,6 +3,5 @@
 
 	app.controller('countryCtrl', ['countryService', function (countryService) {
 			this.crudService = countryService;
-			this.crudService.fetchRecords();
 		}]);
 })();

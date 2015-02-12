@@ -3,6 +3,5 @@
 
 	app.controller('cityCtrl', ['cityService', function (cityService) {
 			this.crudService = cityService;
-			this.crudService.fetchRecords();
 		}]);
 })();
