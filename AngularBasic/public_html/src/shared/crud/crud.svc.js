@@ -4,9 +4,9 @@
 	crud.service('CRUDService', ['Restangular', function (RestAngular) {
 			this.init = function () {
 				this.api = RestAngular.all(this.url);
-				this.cache = {};
+				this.modelRef = {};
 				this.records = [];
-				this.cache.model = {};
+				this.modelRef.model = {};
 				this.editMode = false;
 				this.fetchRecords();
 			};
@@ -14,23 +14,23 @@
 				var self = this;
 				this.api.getList().then(function (data) {
 					self.records = data;
-					self.cache.currentRecord = {};
+					self.modelRef.currentRecord = {};
 					self.editMode = false;
 				});
 			};
 			this.createRecord = function () {
 				var self = this;
 				self.editMode = true;
-				self.cache.model = {};
+				self.modelRef.model = {};
 			};
 			this.saveRecord = function () {
 				var self = this;
-				if (this.cache.model.id) {
-					this.cache.model.put().then(function () {
+				if (this.modelRef.model.id) {
+					this.modelRef.model.put().then(function () {
 						self.fetchRecords();
 					});
 				} else {
-					this.api.post(this.cache.model).then(function () {
+					this.api.post(this.modelRef.model).then(function () {
 						self.fetchRecords();
 					});
 				}
@@ -42,7 +42,7 @@
 				});
 			};
 			this.editRecord = function (record) {
-				this.cache.model = RestAngular.copy(record);
+				this.modelRef.model = RestAngular.copy(record);
 				this.editMode = true;
 			};
 			this.extend = function (child) {

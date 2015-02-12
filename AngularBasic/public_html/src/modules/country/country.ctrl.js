@@ -3,6 +3,6 @@
 
 	app.controller('countryCtrl', ['countryService', '$scope', function (countryService, $scope) {
 			this.crudService = countryService;
-			$scope.country = countryService.cache;
+			$scope.country = countryService.modelRef;
 		}]);
 })();

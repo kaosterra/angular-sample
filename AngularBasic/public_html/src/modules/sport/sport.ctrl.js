@@ -3,6 +3,6 @@
 
 	app.controller('sportCtrl', ['sportService', '$scope', function (sportService, $scope) {
 			this.crudService = sportService;
-			$scope.sport = sportService.cache;
+			$scope.sport = sportService.modelRef;
 		}]);
 })();
