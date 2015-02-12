@@ -46,14 +46,14 @@
 	</div>
 	<div ng-show="cityCtrl.crudService.editMode">
 		<form name="countryForm" role="form">
-			<input id="name" class="form-control" type="hidden" ng-model="cityCtrl.crudService.currentRecord.id"/>
+			<input id="name" class="form-control" type="hidden" ng-model="city.model.id"/>
 			<div class="form-group">
 				<label for="name">Name</label>
-				<input id="name" class="form-control" type="text" ng-model="cityCtrl.crudService.currentRecord.name"/>
+				<input id="name" class="form-control" type="text" ng-model="city.model.name"/>
 			</div>
 			<div class="form-group">
 				<label for="population">Population</label>
-				<input id="population" class="form-control" type="number" ng-model="cityCtrl.crudService.currentRecord.population"/>
+				<input id="population" class="form-control" type="number" ng-model="city.model.population"/>
 			</div>
 		</form>
 	</div>
