@@ -1,36 +1,33 @@
 (function () {
 	var crud = angular.module('CrudModule');
 
-	crud.service('CRUDService', ['Restangular', function (RestAngular) {
-			this.init = function () {
+	crud.factory('CRUDUtils', ['Restangular', function (RestAngular) {
+                function CRUD($scope){
 				this.api = RestAngular.all(this.url);
-				this.modelRef = {};
-				this.records = [];
-				this.modelRef.model = {};
+				$scope.currentRecord = {};
+				$scope.records = [];
 				this.editMode = false;
-				this.fetchRecords();
-			};
+			
 			this.fetchRecords = function () {
-				var self = this;
+                            var self = this;
 				this.api.getList().then(function (data) {
-					self.records = data;
-					self.modelRef.currentRecord = {};
+					$scope.records = data;
+					$scope.currentRecord = {};
 					self.editMode = false;
 				});
 			};
 			this.createRecord = function () {
-				var self = this;
-				self.editMode = true;
-				self.modelRef.model = {};
+				this.editMode = true;
+				$scope.currentRecord = {};
 			};
 			this.saveRecord = function () {
 				var self = this;
-				if (this.modelRef.model.id) {
-					this.modelRef.model.put().then(function () {
+				if ($scope.currentRecord.id) {
+					$scope.currentRecord.put().then(function () {
 						self.fetchRecords();
 					});
 				} else {
-					this.api.post(this.modelRef.model).then(function () {
+					this.api.post($scope.currentRecord).then(function () {
 						self.fetchRecords();
 					});
 				}
@@ -42,11 +39,14 @@
 				});
 			};
 			this.editRecord = function (record) {
-				this.modelRef.model = RestAngular.copy(record);
+				$scope.currentRecord = RestAngular.copy(record);
 				this.editMode = true;
 			};
-			this.extend = function (child) {
-				return App.Utils.extend(child, this);
-			};
+                };
+		return {
+                    extendCtrl: function(obj, scope){
+                        CRUD.call(obj,scope);
+                    }
+                };
 		}]);
 })();
