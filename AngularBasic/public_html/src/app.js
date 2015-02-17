@@ -20,11 +20,11 @@
 		}]);
 	
 	//Configuración módulo sport
-	var sportModule = angular.module('countryModule', ['CrudModule', 'MockModule']);
+	var countryModule = angular.module('countryModule', ['CrudModule', 'MockModule']);
 
-	sportModule.constant('country.context', 'countries');
+	countryModule.constant('country.context', 'countries');
 
-	sportModule.config(['country.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
+	countryModule.config(['country.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
 			urlsProvider.registerUrl(context);
 		}]);
 })();
