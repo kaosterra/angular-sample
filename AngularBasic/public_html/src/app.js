@@ -7,10 +7,10 @@
 				templateUrl: 'src/modules/sport/sport.tpl.html'
 			}).otherwise('/');
 		}]);
-	
+
 	//Configuración módulo sport
-	var sportModule = angular.module('sportModule', ['CrudModule','MockModule']);
-	
+	var sportModule = angular.module('sportModule', ['CrudModule', 'MockModule']);
+
 	sportModule.constant('sport.context', 'sports');
 
 	sportModule.config(['sport.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
