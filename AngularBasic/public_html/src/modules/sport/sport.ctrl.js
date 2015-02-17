@@ -1,8 +1,8 @@
 (function () {
 	var app = angular.module('sportModule');
 
-	app.controller('sportCtrl', [ '$scope', 'CRUDUtils',function ( $scope, CRUDUtils) {
-                this.url = 'sports';
+	app.controller('sportCtrl', [ '$scope', 'CRUDUtils','sport.context',function ( $scope, CRUDUtils, context) {
+                this.url = context;
 		CRUDUtils.extendCtrl(this, $scope);	
 		}]);
 })();
