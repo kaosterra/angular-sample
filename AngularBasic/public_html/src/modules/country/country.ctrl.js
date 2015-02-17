@@ -7,7 +7,11 @@
 			this.fetchRecords();
 			this.getMostPopulated = function () {
 				this.api.customGET('mostPopulated').then(function(data){
-					alert(JSON.stringify(data.plain()));
+					if (data.name) {
+						alert('The most populated country is '+data.name+' with '+data.population+' habitants');
+					}else {
+						alert('There are no countries with population on server');
+					}
 				});;
 			};
 		}]);

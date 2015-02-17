@@ -33,18 +33,15 @@
 				var top;
 				var collection = mockRecords[context];
 				for(var i in collection){
-					if(!top){
+					if(!top && collection[i].population){
 						top = collection[i];
 					}else{
-						if (top.population < collection[i].population) {
+						if (collection[i].population && top.population < collection[i].population) {
 							top = collection[i];
 						}
 					}
 				}
-				if(!top){
-					top = {};
-				}
-				return [200, top, {}];
+				return [200, top || {}, {}];
 			});
 		}]);
 })();
