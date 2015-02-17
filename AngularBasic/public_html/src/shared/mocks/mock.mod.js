@@ -6,10 +6,7 @@
 				var records = [];
 				var url_regexp = new RegExp(url + '/([0-9]+)');
 				$httpBackend.whenGET(url).respond(function (method, url, data) {
-					return [200, {
-							totalRecords: records.length,
-							records: records
-						}, {}];
+					return [200, records, {}];
 				});
 				$httpBackend.whenGET(url_regexp).respond(function (method, url, data) {
 					var id = url.split('/').pop();
