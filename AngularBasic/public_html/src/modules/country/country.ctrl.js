@@ -5,5 +5,10 @@
 			this.url = context;
 			CRUDUtils.extendCtrl(this, $scope);
 			this.fetchRecords();
+			this.getMostPopulated = function () {
+				this.api.customGET('mostPopulated').then(function(data){
+					alert(JSON.stringify(data.plain()));
+				});;
+			};
 		}]);
 })();

@@ -1,6 +1,6 @@
 (function () {
 
-	var mainApp = angular.module('mainApp', ['ngRoute', 'sportModule','countryModule']);
+	var mainApp = angular.module('mainApp', ['ngRoute', 'sportModule', 'countryModule']);
 
 	mainApp.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider.when('/sport', {
@@ -18,7 +18,7 @@
 	sportModule.config(['sport.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
 			urlsProvider.registerUrl(context);
 		}]);
-	
+
 	//Configuración módulo sport
 	var countryModule = angular.module('countryModule', ['CrudModule', 'MockModule']);
 
@@ -26,5 +26,25 @@
 
 	countryModule.config(['country.context', 'MockModule.urlsProvider', function (context, urlsProvider) {
 			urlsProvider.registerUrl(context);
+		}]);
+	
+	countryModule.run(['$httpBackend', 'country.context','MockModule.mockRecords', function ($httpBackend, context, mockRecords) {
+			$httpBackend.whenGET('webresources/'+context+'/mostPopulated').respond(function (method, url, data) {
+				var top;
+				var collection = mockRecords[context];
+				for(var i in collection){
+					if(!top){
+						top = collection[i];
+					}else{
+						if (top.population < collection[i].population) {
+							top = collection[i];
+						}
+					}
+				}
+				if(!top){
+					top = {};
+				}
+				return [200, top, {}];
+			});
 		}]);
 })();
