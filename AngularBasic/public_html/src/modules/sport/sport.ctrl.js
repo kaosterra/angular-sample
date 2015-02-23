@@ -5,8 +5,5 @@
 			this.url = context;
 			CRUDUtils.extendCtrl(this, $scope);
 			this.fetchRecords();
-			this.getAvgAge = function(sport){
-				return (sport.minAge + sport.maxAge)/2;
-			};
 		}]);
 })();
